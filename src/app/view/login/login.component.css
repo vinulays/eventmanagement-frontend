@@ -1,0 +1,69 @@
+.backgroundlogin {
+  background-image: url("src/assets/newhall.jpg");
+
+  background-repeat: no-repeat;
+  background-size: 100%;
+}
+mat-card {
+  width: 30%;
+  border: #003300;
+  box-shadow: #8c7906 2px 2px 15px;
+  border-radius: 30px !important;
+}
+
+mat-card-header {
+  background: #ffffff;
+  border-radius: 30px !important;
+}
+
+mat-card-header img {
+  /*width: 55%;*/
+  /*height: 55%;*/
+  /*padding-left: 90px;*/
+}
+
+.logingimg {
+  text-align: center;
+  width: 100%;
+}
+
+#x {
+  border: 2px solid;
+  align-content: center !important;
+  padding: 100px;
+}
+
+mat-card-title p {
+  color: #4f4304;
+  text-align: center;
+  font-family: "Times New Roman";
+  font-size: 12px;
+}
+
+mat-card-content {
+  padding: 10%;
+}
+
+mat-card-actions {
+  child-align: middle !important;
+}
+
+mat-card-actions button:nth-child(2) {
+  margin-left: 10px;
+}
+
+button {
+  color: white !important;
+}
+
+button[btn-a] {
+  background: #b4840c !important;
+}
+
+button[btn-b] {
+  background: #423901 !important;
+}
+
+.mat-mdc-card-header {
+  align-items: center !important;
+}

@@ -1,0 +1,51 @@
+<div class="homebackgrond">
+  <mat-grid-list [cols]="1" rowHeight="5rem">
+    <mat-grid-tile [colspan]="1" [rowspan]="2">
+      <img src="assets/logo1.jpg" />
+    </mat-grid-tile>
+
+    <mat-grid-tile [colspan]="1" [rowspan]="3">
+      <mat-card>
+        <mat-card-content routerLink="../event">Event Booking</mat-card-content>
+      </mat-card>
+
+      <mat-card>
+        <mat-card-content routerLink="../customer"
+          >Customer Registration</mat-card-content
+        >
+      </mat-card>
+
+      <mat-card>
+        <mat-card-content routerLink="../hall"
+          >Hall Management</mat-card-content
+        >
+      </mat-card>
+    </mat-grid-tile>
+
+    <mat-grid-tile [colspan]="1" [rowspan]="3">
+      <mat-card>
+        <mat-card-content routerLink="../payment"
+          >Payment Handling</mat-card-content
+        >
+      </mat-card>
+
+      <mat-card>
+        <mat-card-content routerLink="../employee"
+          >Employee Management</mat-card-content
+        >
+      </mat-card>
+
+      <mat-card>
+        <mat-card-content routerLink="../item"
+          >Item Management</mat-card-content
+        >
+      </mat-card>
+
+      <mat-card>
+        <mat-card-content routerLink="../menu"
+          >Menu Management</mat-card-content
+        >
+      </mat-card>
+    </mat-grid-tile>
+  </mat-grid-list>
+</div>

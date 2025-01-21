@@ -1,0 +1,145 @@
+<mat-grid-list [cols]="cols" rowHeight="4rem">
+  <mat-grid-tile [colspan]="4" [rowspan]="10">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>Menu Detail</mat-card-title>
+      </mat-card-header>
+      <mat-card-content id="menuform">
+        <mat-table [dataSource]="data">
+          <ng-container
+            *ngFor="let column of columns; let i = index"
+            [matColumnDef]="column"
+          >
+            <mat-header-cell *matHeaderCellDef>{{
+              headers[i]
+            }}</mat-header-cell>
+            <mat-cell *matCellDef="let element">{{
+              getProperty(element, binders[i])
+            }}</mat-cell>
+          </ng-container>
+
+          <mat-header-row id="th" *matHeaderRowDef="columns"></mat-header-row>
+
+          <mat-row
+            *matRowDef="let row; columns: columns"
+            (click)="fillForm(row)"
+            [ngClass]="{ 'selected-row': row === selectedrow }"
+          ></mat-row>
+        </mat-table>
+
+        <div id="formContainer">
+          <mat-form [formGroup]="form">
+            <mat-form-field appearance="outline">
+              <mat-label>Menu Name</mat-label>
+              <input matInput formControlName="name" />
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>Price per person</mat-label>
+              <input matInput formControlName="price" />
+            </mat-form-field>
+
+            <div id="butpanel">
+              <button mat-raised-button (click)="add()" [disabled]="!enaadd">
+                Add
+              </button>
+              <button mat-raised-button (click)="clear()">Clear</button>
+              <button mat-raised-button (click)="update()" [disabled]="!enaupd">
+                Update
+              </button>
+              <button mat-raised-button [disabled]="!enadel" (click)="delete()">
+                Delete
+              </button>
+            </div>
+          </mat-form>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </mat-grid-tile>
+
+  <mat-grid-tile [colspan]="8" [rowspan]="6">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>Sub menu table</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <mat-table [dataSource]="subMenuData">
+          <ng-container
+            *ngFor="let column of subMenuColumns; let i = index"
+            [matColumnDef]="column"
+          >
+            <mat-header-cell *matHeaderCellDef>{{
+              subMenuHeaders[i]
+            }}</mat-header-cell>
+            <mat-cell *matCellDef="let element">{{
+              getProperty(element, subMenuBinders[i])
+            }}</mat-cell>
+          </ng-container>
+
+          <mat-header-row
+            id="th"
+            *matHeaderRowDef="subMenuColumns"
+          ></mat-header-row>
+
+          <mat-row
+            *matRowDef="let row; columns: subMenuColumns"
+            (click)="fillSubMenuForm(row)"
+            [ngClass]="{ 'selected-row': row === selectedSubRow }"
+          ></mat-row>
+        </mat-table>
+        <div class="empty-msg" *ngIf="subMenuData.paginator?.length === 0">
+          No records found
+        </div>
+        <mat-paginator
+          [length]="20"
+          [pageSize]="5"
+          [pageSizeOptions]="[3, 5, 10, 20]"
+        ></mat-paginator>
+      </mat-card-content>
+    </mat-card>
+  </mat-grid-tile>
+
+  <mat-grid-tile [colspan]="8" [rowspan]="4">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>Submenu Detail</mat-card-title>
+      </mat-card-header>
+      <mat-card-content id="menuform">
+        <mat-form [formGroup]="subMenuForm">
+          <mat-form-field appearance="outline">
+            <mat-label>Submenu Name</mat-label>
+            <input matInput formControlName="name" />
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Submenu Ingredients</mat-label>
+            <textarea matInput formControlName="ingredients"></textarea>
+          </mat-form-field>
+
+          <div id="subMenuBtnPanel">
+            <button
+              mat-raised-button
+              (click)="addSubMenu()"
+              [disabled]="!enaaddSub"
+            >
+              Add
+            </button>
+            <button mat-raised-button (click)="clearSubMenu()">Clear</button>
+            <button
+              mat-raised-button
+              (click)="updateSubMenu()"
+              [disabled]="!enaupdSub"
+            >
+              Update
+            </button>
+            <button
+              mat-raised-button
+              [disabled]="!enadelSub"
+              (click)="deleteSubMenu()"
+            >
+              Delete
+            </button>
+          </div>
+        </mat-form>
+      </mat-card-content>
+    </mat-card>
+  </mat-grid-tile>
+</mat-grid-list>

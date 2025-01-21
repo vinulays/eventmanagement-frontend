@@ -1,0 +1,34 @@
+.homebackgrond {
+  background-image: url("src/assets/Siyasra.PNG");
+}
+mat-grid-list {
+  padding: 10% 20% 10% 20% !important;
+  margin: 20px;
+}
+
+mat-grid-list mat-grid-tile:nth-child(1) {
+  background-color: #251505 !important;
+  min-height: 100px !important;
+}
+
+img {
+  width: 15%;
+  height: 80%;
+}
+
+mat-card {
+  background-color: rgba(196, 164, 132, 0.65);
+  color: #ffffff;
+  height: 80% !important;
+  width: 200px;
+  margin: 10px;
+  font-size: large;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+mat-card-content {
+  text-align: center;
+  line-height: 1.5rem;
+}

@@ -1,0 +1,139 @@
+<mat-toolbar>
+  <mat-toolbar-row>
+    <span class="toolbar-left">
+      <button mat-icon-button (click)="opened = !opened" class="btn-nav">
+        <mat-icon>menu</mat-icon>
+      </button>
+      <img src="/assets/logo1.jpg" class="img-logo" />
+    </span>
+
+    <span class="toolbar-right">
+      <label class="lbl-user">Chamali Perera</label>
+      <img src="assets/user.png" class="img-user" />
+      <button mat-icon-button (click)="logout()" class="btn-logout">
+        <mat-icon>exit_to_app</mat-icon>
+      </button>
+    </span>
+  </mat-toolbar-row>
+</mat-toolbar>
+
+<mat-sidenav-container>
+  <mat-sidenav [(opened)]="opened" mode="side">
+    <mat-nav-list>
+      <mat-list-item
+        ><a routerLink="home">
+          <mat-icon>home</mat-icon>
+          Home</a
+        ></mat-list-item
+      >
+      <mat-list-item
+        ><a>
+          <mat-icon>widgets</mat-icon>
+          Dashboard</a
+        ></mat-list-item
+      >
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-list-item
+            ><a>
+              <mat-icon>person</mat-icon>
+              Admin</a
+            ></mat-list-item
+          >
+        </mat-expansion-panel-header>
+        <mat-list-item><a routerLink="employee">Employee</a></mat-list-item>
+        <mat-list-item><a routerLink="customer">Customer</a></mat-list-item>
+        <mat-list-item
+          ><a routerLink="salary">Salary Management</a></mat-list-item
+        >
+      </mat-expansion-panel>
+
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-list-item
+            ><a>
+              <mat-icon>event_note</mat-icon>
+              Events Management</a
+            ></mat-list-item
+          >
+        </mat-expansion-panel-header>
+        <mat-list-item><a routerLink="event">Booking</a></mat-list-item>
+        <mat-list-item><a routerLink="customer">Customer</a></mat-list-item>
+        <mat-list-item><a routerLink="payment">Payment</a></mat-list-item>
+        <mat-list-item><a>Custom Packages</a></mat-list-item>
+      </mat-expansion-panel>
+
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-list-item
+            ><a>
+              <mat-icon>person_add</mat-icon>
+              Services</a
+            ></mat-list-item
+          >
+        </mat-expansion-panel-header>
+        <mat-list-item><a>Decoration Packages</a></mat-list-item>
+        <mat-list-item><a routerLink="menu">Menu</a></mat-list-item>
+        <mat-list-item><a routerLink="hall">Hall</a></mat-list-item>
+      </mat-expansion-panel>
+
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-list-item
+            ><a>
+              <mat-icon>class</mat-icon>
+              Stock and expenses</a
+            ></mat-list-item
+          >
+        </mat-expansion-panel-header>
+        <mat-list-item><a routerLink="item">Item management</a></mat-list-item>
+        <mat-list-item
+          ><a routerLink="supplier">Supplier management</a></mat-list-item
+        >
+        <mat-list-item
+          ><a routerLink="expense">Expenses management</a></mat-list-item
+        >
+      </mat-expansion-panel>
+
+      <!-- <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-list-item
+            ><a>
+              <mat-icon>shopping_cart</mat-icon>
+              Stock</a
+            ></mat-list-item
+          >
+        </mat-expansion-panel-header>
+        <mat-list-item><a routerLink="hall">Stock Management</a></mat-list-item>
+        <mat-list-item
+          ><a routerLink="hall">Supplier Management</a></mat-list-item
+        >
+        <mat-list-item><a>Class Schedule</a></mat-list-item>
+        <mat-list-item><a>Attendance</a></mat-list-item>
+        <mat-list-item><a>Progress Review</a></mat-list-item>
+      </mat-expansion-panel> -->
+
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-list-item
+            ><a>
+              <mat-icon>poll</mat-icon>
+              Reports</a
+            ></mat-list-item
+          >
+        </mat-expansion-panel-header>
+        <mat-list-item
+          ><a routerLink="report-countbydesignation"
+            >Employee By Designation</a
+          ></mat-list-item
+        >
+        <!-- <mat-list-item><a>Attendance Report</a></mat-list-item>
+        <mat-list-item><a>Academic Reports</a></mat-list-item> -->
+      </mat-expansion-panel>
+    </mat-nav-list>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>

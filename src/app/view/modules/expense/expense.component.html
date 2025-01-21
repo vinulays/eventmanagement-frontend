@@ -1,0 +1,209 @@
+<mat-grid-list [cols]="cols" rowHeight="4rem">
+  <mat-grid-tile [colspan]="4" [rowspan]="10">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>Expense Detail</mat-card-title>
+      </mat-card-header>
+      <mat-card-content id="expenseform">
+        <mat-form [formGroup]="form">
+          <mat-form-field appearance="outline">
+            <mat-label>expense Type</mat-label>
+            <mat-select
+              formControlName="expenseType"
+              (selectionChange)="enableSupplier()"
+            >
+              <mat-option [value]="null" selected>Not Selected</mat-option>
+              <mat-option
+                *ngFor="let expenseType of expenseTypes"
+                [value]="expenseType"
+                >{{ expenseType.name }}</mat-option
+              >
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Supplier</mat-label>
+            <mat-select
+              formControlName="supplier"
+              (selectionChange)="filterItems($event.value)"
+            >
+              <mat-option [value]="null" selected>Not Selected</mat-option>
+              <mat-option
+                *ngFor="let supplier of suppliers"
+                [value]="supplier"
+                >{{ supplier.fullname }}</mat-option
+              >
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Item</mat-label>
+            <mat-select formControlName="item">
+              <mat-option [value]="null" selected>Not Selected</mat-option>
+              <mat-option *ngFor="let item of supplierItems" [value]="item">{{
+                item.name
+              }}</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Description</mat-label>
+            <input matInput formControlName="description" />
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Date</mat-label>
+            <input matInput [matDatepicker]="date" formControlName="date" />
+            <mat-datepicker-toggle
+              matIconSuffix
+              [for]="date"
+            ></mat-datepicker-toggle>
+            <mat-datepicker #date></mat-datepicker>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Cost</mat-label>
+            <input matInput formControlName="cost" />
+          </mat-form-field>
+
+          <div id="butpanel">
+            <button mat-raised-button (click)="add()" [disabled]="!enaadd">
+              Add
+            </button>
+            <button mat-raised-button (click)="clear()">Clear</button>
+            <button mat-raised-button (click)="update()" [disabled]="!enaupd">
+              Update
+            </button>
+            <button mat-raised-button [disabled]="!enadel" (click)="delete()">
+              Delete
+            </button>
+          </div>
+        </mat-form>
+      </mat-card-content>
+    </mat-card>
+  </mat-grid-tile>
+
+  <mat-grid-tile [colspan]="8" [rowspan]="4">
+    <mat-card id="ssearch">
+      <mat-card-header>
+        <mat-card-title>Expense Search</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <mat-form [formGroup]="ssearch">
+          <mat-form-field appearance="outline">
+            <mat-label>expense Type</mat-label>
+            <mat-select formControlName="ssexpenseType">
+              <mat-option [value]="null" selected>Not Selected</mat-option>
+              <mat-option
+                *ngFor="let expenseType of expenseTypes"
+                [value]="expenseType"
+                >{{ expenseType.name }}</mat-option
+              >
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Search by Description</mat-label>
+            <input matInput formControlName="ssdescription" />
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Supplier</mat-label>
+            <mat-select formControlName="sssupplier">
+              <mat-option [value]="null" selected>Not Selected</mat-option>
+              <mat-option
+                *ngFor="let supplier of suppliers"
+                [value]="supplier"
+                >{{ supplier.fullname }}</mat-option
+              >
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Search by Cost</mat-label>
+            <input matInput formControlName="sscost" />
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Date</mat-label>
+            <input matInput [matDatepicker]="ssdate" formControlName="ssdate" />
+            <mat-datepicker-toggle
+              matIconSuffix
+              [for]="ssdate"
+            ></mat-datepicker-toggle>
+            <mat-datepicker #ssdate></mat-datepicker>
+          </mat-form-field>
+
+          <div>
+            <button mat-raised-button color="primary" (click)="search()">
+              <mat-icon>search</mat-icon>
+              Search
+            </button>
+            <button mat-raised-button color="primary" (click)="clearSearch()">
+              <mat-icon>reorder</mat-icon>
+              Clear Search
+            </button>
+          </div>
+        </mat-form>
+      </mat-card-content>
+    </mat-card>
+  </mat-grid-tile>
+
+  <mat-grid-tile [colspan]="8" [rowspan]="6">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>Expense Table</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <mat-table [dataSource]="data">
+          <ng-container
+            *ngFor="let column of columns; let i = index"
+            [matColumnDef]="column"
+          >
+            <mat-header-cell *matHeaderCellDef>{{
+              headers[i]
+            }}</mat-header-cell>
+            <mat-cell *matCellDef="let element">{{
+              getProperty(element, binders[i])
+            }}</mat-cell>
+          </ng-container>
+          <!-- 
+          <ng-container
+            *ngFor="let cscolumn of cscolumns; let i = index"
+            [matColumnDef]="cscolumn"
+          >
+            <mat-header-cell *matHeaderCellDef>
+              <mat-form [formGroup]="csearch" class="csearch">
+                <mat-form-field appearance="outline">
+                  <mat-label>{{ csprompts[i] }}</mat-label>
+                  <input
+                    matInput
+                    [formControlName]="cscolumn"
+                    (keyup)="filterTable()"
+                  />
+                </mat-form-field>
+              </mat-form>
+            </mat-header-cell>
+          </ng-container> -->
+          <mat-header-row id="th" *matHeaderRowDef="columns"></mat-header-row>
+          <!-- <mat-header-row *matHeaderRowDef="cscolumns"></mat-header-row> -->
+
+          <mat-row
+            *matRowDef="let row; columns: columns"
+            (click)="fillForm(row)"
+            [ngClass]="{ 'selected-row': row === selectedrow }"
+          ></mat-row>
+        </mat-table>
+
+        <div class="empty-msg" *ngIf="data.paginator?.length === 0">
+          No records found
+        </div>
+        <mat-paginator
+          [length]="20"
+          [pageSize]="5"
+          [pageSizeOptions]="[3, 5, 10, 20]"
+        ></mat-paginator>
+      </mat-card-content>
+    </mat-card>
+  </mat-grid-tile>
+</mat-grid-list>
